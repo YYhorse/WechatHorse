@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<!-- <view class="container">
+ <view class="container">
        <text class="user-motto">小程序点餐，方便快捷</text>
       <image 
         class='img'
@@ -17,9 +17,9 @@
         class='img'
         src="../image/4.png"
         />  
-</view> -->
-<view>{{message}}</view> 
-<!-- <view wx:for-items="{{array}}" wx:key="key"> {{item}} </view> -->
+</view> 
+
+<!-- <view>{{message}}</view> 
 <view id="tapTest" data-hi="WeChat" bindtap="tapName"> Click me! </view>
 <checkbox checked="{{false}}" bindtap='CheckMethod'> </checkbox>
 <view class="group">
@@ -30,4 +30,24 @@
 <view>
   <text>{{message}}</text>
   <button bindtap='CheckButton'>{{message}}</button>
-</view>
+</view> -->
+
+<!-- <block wx:for="{{testData}}"
+    wx:for-item="mainitem"
+    wx:key="{{mainindex}}"
+    wx:for-index="mainindex">
+    <view wx:for="{{mainitem}}"
+        wx:for-item="subitem"
+        wx:key="{{subitem.id}}"
+        wx:for-index="subindex">
+        <view class="dom-item">第一层 {{mainindex}}  {{subitem.id}}  {{subitem.name}}</view>
+    </view>
+</block> -->
+
+<!-- <block wx:for="{{student}}" wx:key="id">
+ <view style="color:{{index==currentItemId?'#e98f36':'#000'}}" data-numid="{{index}}"  bindtap="clickTap">  
+  {{item.name}} {{item.age}} 
+ </view>  
+</block>
+
+<view>"全部名字"+{{totalname}}</view> -->

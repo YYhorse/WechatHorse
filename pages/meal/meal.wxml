@@ -2,8 +2,8 @@
 <view class="ShopInfoMain">
    <image class="HeadPhoto" src="../image/facelogo.png"/>
    <view class="ShopTitle">
-        <text class="ShopName_txt">核动力网咖</text>
-        <text class="ShopDescription_txt">核动力电竞主题网咖</text>
+        <text class="ShopName_txt">{{ShopName_txt}}</text>
+        <text class="ShopDescription_txt">{{ShopDescription_txt}}</text>
    </view>
    <view class="ShopMessage">
          <view class="CallService">
@@ -17,8 +17,37 @@
    </view>
 </view>
 <view class='ActivityInfo'>
-  <text class="ActivityInfo_txt">店铺活动：满50元立减5元 | 满100元立减15元</text>
+  <text class="ActivityInfo_txt">店铺活动：{{ShopActivity_txt}}</text>
 </view>
+ <view class="ShowLayout"> 
+    <view class="CategoryLayout">
+      <block wx:for="{{product_categories}}" wx:key="code">
+        <view 
+          class='CategoryItemLayout'
+          style="background-color:{{index==CurrentCategoryPostion?'#ff9800':whitesmoke}}" 
+          data-numid="{{index}}"  
+          bindtap="ClickCategoryMethod">
+            <view  class="CategoryName_txt" 
+              style="color:{{index==CurrentCategoryPostion?'#fff':'#000'}}">
+              {{item.name}}
+            </view>    
+        </view>  
+      </block>
+    </view>
+    <scroll-view class="ProductLayout" style="height:70%;" scroll-y="true" scroll-top="0">
+      <block wx:for="{{product_items}}" wx:key="id">
+        <view class='ProductItemLayout'>
+             <image class="ProductItemPhoto" src="../image/loading.png"/>
+             <view class='ProductItemInfoLayout'>
+                <text class="ProductItemName">{{item.name}}</text>
+                <text class="ProductItemDescription">{{item.description}}</text>
+                <text class="ProductItemPrice">￥{{item.origin_price}}</text>
+             </view>
+        </view>
+      </block> 
+    </scroll-view> 
+ </view> 
+
 <view class="BuyFoodLayout">
    <image class="BuyCarIcon" src="../image/buycaricon.png"/>
    <text class="BuyFoodPrice_txt">￥0.0元 </text>

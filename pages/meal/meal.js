@@ -1,9 +1,44 @@
+var postData = require('../../testjson/testjson.js');
 Page({
+  data:{
+    CurrentCategoryPostion:0,
+    ShopName_txt:"",
+    ShopDescription_txt:"",
+    ShopActivity_txt:"",
+    product_categories:"",
+    product_items:""
+  },
   onLoad:function(){
     wx.setNavigationBarTitle({
       title: '点餐',
+    }),
+    this.setData({
+      ShopName_txt: postData.postList.name,
+      ShopDescription_txt: postData.postList.description,
+      ShopActivity_txt:this.GetActivityInfo(),
+      product_categories:postData.postList.product_categories,
+      product_items: postData.postList.product_categories[this.data.CurrentCategoryPostion].products
     })
-  }
+  },
+  /* 解析活动信息 */
+  GetActivityInfo:function(){
+    var temp = "";
+    for (var i = 0; i < postData.postList.full_cuts.length;i++){
+      if(postData.postList.full_cuts[i].type=="full_cut")
+        temp += " 满￥" + postData.postList.full_cuts[i].full + "立减￥" + postData.postList.full_cuts[i].cut;
+      else
+        temp += " 满￥" + postData.postList.full_cuts[i].full + "赠" + postData.postList.full_cuts[i].cut;
+    }
+    return temp; 
+  },
+  ClickCategoryMethod: function (e) {
+    var Index = e.currentTarget.dataset.numid;
+    console.log("XXXXX" + Index);
+    this.setData({
+      CurrentCategoryPostion: Index,
+      product_items: postData.postList.product_categories[Index].products
+    });
+  },
 })
 
 /*

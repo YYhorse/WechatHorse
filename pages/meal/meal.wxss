@@ -31,6 +31,16 @@
   margin-top: 10rpx;
   color: white;
 }
+.ShopMessage{
+  display: flex;
+  position:fixed;
+  height:200rpx;
+  width: 210rpx;
+  flex-direction: column;
+  top: 0rpx;
+  right: 0rpx;
+  margin-right: 10rpx;
+}
 .CallService{
   display: flex;
   flex-direction: row;
@@ -77,6 +87,80 @@
   margin-top: 10rpx;
   color: red;
 }
+.ShowLayout{
+  display: flex;
+  position:fixed;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  top: 245rpx;
+}
+.CategoryLayout{
+  display: flex;
+  flex-direction: column;
+  width: 180rpx;
+  height: 100%;
+  background: whitesmoke;
+}
+.CategoryItemLayout{
+  display: flex;
+	flex-direction: row;
+	padding: 5px 0;
+  justify-content:center;
+	border-bottom: 1px solid #ededed;
+  text-align: center
+}
+.CategoryName_txt{
+  font-size: 50rpx;
+  display: flex;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  justify-content:center;
+  text-align:center;
+  color: "{{index==CurrentCategoryPostion?white:gray}}"
+}
+.ProductLayout{
+   display: flex;
+   flex-direction: column;
+   background: white;
+   width: 80%;
+}
+.ProductItemLayout{
+  display: flex;
+  flex-direction: row;
+  height: 150rpx;
+  padding: 5px 0;
+  border-bottom: 1px solid #ededed;
+}
+.ProductItemPhoto{
+  width:100rpx;
+  height:100rpx;
+  margin-left: 30rpx;
+  margin-top: 25rpx;
+}
+.ProductItemInfoLayout{
+  display: flex;
+  flex-direction: column;
+}
+.ProductItemName{
+  font-size: 40rpx;
+  font-weight:bold;
+  color: black;
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+}
+.ProductItemDescription{
+  font-size: 25rpx;
+  color: gray;
+  margin-left: 30rpx;
+}
+.ProductItemPrice{
+  font-size: 30rpx;
+  font-weight:bold;
+  color: red;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+}
 
 .BuyFoodLayout{
   position:fixed;
@@ -114,5 +198,11 @@
   color: white;
   text-align:center;
   margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+.temptxt{
+  font-size: 50rpx;
+  font-weight:bold;
+  color: red;
   margin-left: 20rpx;
 }
