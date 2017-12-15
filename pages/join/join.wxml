@@ -1,0 +1,5 @@
+<button type="default" bindtap="showModal">获取电话联系方式</button>
+<view>
+  <modal title="客服电话" hidden="{{modalHidden}}" confirm-text="拨打" cancel-text="取消"
+  bindconfirm="calltel" bindcancel="modalBindcancel">是否拨打18698711581</modal>
+</view>

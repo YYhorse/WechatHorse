@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<!-- <view class="container">
+       <text class="user-motto">小程序点餐，方便快捷</text>
+      <image 
+        class='img'
+        src="../image/1.png" 
+        />  
+        <image 
+        class='img'
+        src="../image/2.png" 
+        />  
+         <image 
+         class='img'
+        src="../image/3.jpg" 
+        /> 
+        <image
+        class='img'
+        src="../image/4.png"
+        />  
+</view> -->
+<view>{{message}}</view> 
+<!-- <view wx:for-items="{{array}}" wx:key="key"> {{item}} </view> -->
+<view id="tapTest" data-hi="WeChat" bindtap="tapName"> Click me! </view>
+<checkbox checked="{{false}}" bindtap='CheckMethod'> </checkbox>
+<view class="group">
+  <block wx:for="{{iconSize}}" wx:key="key">
+    <icon type="success" size="{{item}}"/>
+  </block>
+</view>
+<view>
+  <text>{{message}}</text>
+  <button bindtap='CheckButton'>{{message}}</button>
+</view>

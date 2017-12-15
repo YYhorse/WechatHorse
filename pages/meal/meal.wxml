@@ -1,0 +1,28 @@
+<!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->
+<view class="ShopInfoMain">
+   <image class="HeadPhoto" src="../image/facelogo.png"/>
+   <view class="ShopTitle">
+        <text class="ShopName_txt">核动力网咖</text>
+        <text class="ShopDescription_txt">核动力电竞主题网咖</text>
+   </view>
+   <view class="ShopMessage">
+         <view class="CallService">
+            <text class="CallServiceTxt">呼叫服务</text>
+            <image class="CallServiceIcon" src="../image/callservice.png"/>
+         </view>
+         <view class="MyOrder">
+            <text class="CallServiceTxt">我的订单</text>
+            <image class="CallServiceIcon" src="../image/myorder.png"/>
+         </view>
+   </view>
+</view>
+<view class='ActivityInfo'>
+  <text class="ActivityInfo_txt">店铺活动：满50元立减5元 | 满100元立减15元</text>
+</view>
+<view class="BuyFoodLayout">
+   <image class="BuyCarIcon" src="../image/buycaricon.png"/>
+   <text class="BuyFoodPrice_txt">￥0.0元 </text>
+</view>
+<view class="CheckOrderLayout">
+  <view class="CheckOrderTxt">确认下单</view>
+</view>

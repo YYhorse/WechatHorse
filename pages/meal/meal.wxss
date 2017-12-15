@@ -1,0 +1,118 @@
+.ShopInfoMain{  
+  display: flex;
+  position:fixed;
+  height:200rpx;
+  width: 100%;
+  flex-direction: row;
+  background-color:#ff9800;
+  top: 0rpx;
+}
+.HeadPhoto{
+  display: flex;
+  margin-top: 30rpx;
+  margin-left: 50rpx;
+  width:150rpx;
+  height:150rpx;
+}
+.ShopTitle{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+}
+.ShopName_txt{
+  font-size: 50rpx;
+  font-weight:bold;
+  color: white;
+}
+.ShopDescription_txt{
+  font-size: 30rpx;
+  margin-top: 10rpx;
+  color: white;
+}
+.CallService{
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  border-radius: 10px; 
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+}
+.CallServiceTxt{
+  font-size: 30rpx;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  margin-right: 5rpx;
+  color: white;
+}
+.CallServiceIcon{
+  width:35rpx;
+  height:35rpx;
+  margin-left: 5rpx;
+  margin-top: 15rpx;
+  margin-right: 10rpx;
+}
+.MyOrder{
+  display: flex;
+  flex-direction: row;
+  background-color: green;
+  border-radius: 10px; 
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+}
+.ActivityInfo{
+  display: flex;
+  position:fixed;
+  height:45rpx;
+  width: 100%;
+  flex-direction: row;
+  background-color:gainsboro;
+  top: 200rpx;
+}
+.ActivityInfo_txt{
+  font-size: 25rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  color: red;
+}
+
+.BuyFoodLayout{
+  position:fixed;
+  height:100rpx;
+  width: 100%;
+  text-align:left;
+  background-color:#efefef;
+  bottom:0rpx;
+}
+.BuyCarIcon{
+  width:80rpx;
+  height:80rpx;
+  margin-left: 40rpx;
+  margin-top: 10rpx;
+}
+.BuyFoodPrice_txt{
+  font-size: 50rpx;
+  font-weight:bold;
+  color: gray;
+  margin-left: 20rpx;
+}
+.CheckOrderLayout{
+  position:fixed;
+  height:100rpx;
+  width: 200rpx;
+  background-color:#ff9800;
+  bottom:0rpx;
+  right: 0rpx;
+ 
+}
+.CheckOrderTxt{
+  display: flex;
+  font-size: 40rpx;
+  font-weight:bold;
+  color: white;
+  text-align:center;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
