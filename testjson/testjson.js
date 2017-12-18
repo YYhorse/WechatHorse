@@ -22,8 +22,8 @@ var localjson = {
       "products": [
         {
           "id": 1,
-          "name": "康师傅拉面",
-          "description": "红烧牛肉拉面一桶红烧牛肉拉面",
+          "name": "康师傅拉面但无奈奈德娃",
+          "description": "红烧牛肉拉面一桶红烧牛肉拉面哇打我打我的",
           "image_path": "http://www.whitedragoncode.xyz/uploads/product_image/path/1/1127133937.jpg",
           "origin_price": "6.0",
           "active_price": "4.5"

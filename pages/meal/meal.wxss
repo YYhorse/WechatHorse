@@ -111,10 +111,10 @@
   text-align: center
 }
 .CategoryName_txt{
-  font-size: 50rpx;
+  font-size: 30rpx;
   display: flex;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
   justify-content:center;
   text-align:center;
   color: "{{index==CurrentCategoryPostion?white:gray}}"
@@ -140,6 +140,7 @@
 }
 .ProductItemInfoLayout{
   display: flex;
+  width: 350rpx;
   flex-direction: column;
 }
 .ProductItemName{
@@ -148,11 +149,17 @@
   color: black;
   margin-top: 20rpx;
   margin-left: 30rpx;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
 }
 .ProductItemDescription{
   font-size: 25rpx;
   color: gray;
   margin-left: 30rpx;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
 }
 .ProductItemPrice{
   font-size: 30rpx;
@@ -161,13 +168,47 @@
   margin-left: 30rpx;
   margin-top: 10rpx;
 }
+.ProductItemNumberLayout{
+  display: flex;
+  width: 100rpx;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.ImageShow{
+  width:50rpx;
+  height:50rpx;
+ 
+}
+.ImageHide{
+  width:50rpx;
+  height:50rpx;
+  display: none; 
+}
+.TextShow{
+ font-size: 30rpx;
+  font-weight:bold;
+  color: black;
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  display: block; 
+}
+.TextHide{
+   display: none; 
+}
+
+.add_btn{
+  width:50rpx;
+  height:50rpx;
+}
 
 .BuyFoodLayout{
   position:fixed;
   height:100rpx;
   width: 100%;
   text-align:left;
-  background-color:#efefef;
+  background-color:#4A4848;
   bottom:0rpx;
 }
 .BuyCarIcon{
@@ -179,7 +220,7 @@
 .BuyFoodPrice_txt{
   font-size: 50rpx;
   font-weight:bold;
-  color: gray;
+  color: white;
   margin-left: 20rpx;
 }
 .CheckOrderLayout{
@@ -197,8 +238,8 @@
   font-weight:bold;
   color: white;
   text-align:center;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+  margin-top: 25rpx;
+  margin-left: 50rpx;
 }
 .temptxt{
   font-size: 50rpx;

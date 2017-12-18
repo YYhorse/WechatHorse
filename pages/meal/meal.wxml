@@ -43,6 +43,11 @@
                 <text class="ProductItemDescription">{{item.description}}</text>
                 <text class="ProductItemPrice">￥{{item.origin_price}}</text>
              </view>
+             <view class="ProductItemNumberLayout">
+                <image class="{{item.number>0?'ImageShow':'ImageHide'}}" data-numid="{{index}}"bindtap="ReduceFoodNumMethod"src="../image/reduce.png"></image>
+                    <text class="{{item.number>0?'TextShow':'TextHide'}}" >{{item.number}}</text>
+                <image class="add_btn" data-numid="{{index}}"bindtap="AddFoodNumMethod" src="../image/add.png"></image>
+             </view>
         </view>
       </block> 
     </scroll-view> 
@@ -53,5 +58,5 @@
    <text class="BuyFoodPrice_txt">￥0.0元 </text>
 </view>
 <view class="CheckOrderLayout">
-  <view class="CheckOrderTxt">确认下单</view>
+  <view class="CheckOrderTxt">去结算</view>
 </view>
