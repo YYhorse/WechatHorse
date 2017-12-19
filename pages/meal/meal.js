@@ -7,7 +7,8 @@ Page({
     ShopActivity_txt:"",
     product_categories:"",
     product_items:"",
-    productData:postData.postList.product_categories     //全部商品
+    TotalPrice:"￥0.0元",
+    showModalStatus:false,
   },
   onLoad:function(){
     wx.setNavigationBarTitle({  title: '小程序点餐' }),
@@ -15,9 +16,8 @@ Page({
       ShopName_txt: postData.postList.name,
       ShopDescription_txt: postData.postList.description,
       ShopActivity_txt:this.GetActivityInfo(),
-      product_categories: this.data.productData,
-      product_items: this.InitProductNumber(),
-      product_items: this.data.productData[this.data.CurrentCategoryPostion].products,
+      product_categories: postData.postList.product_categories,     //全部商品
+      product_items: postData.postList.product_categories[this.data.CurrentCategoryPostion].products
     })
   },
   /* 解析活动信息 */
@@ -31,48 +31,131 @@ Page({
     }
     return temp; 
   },
-  /* 为每个产品增加数量=0属性 */
-  InitProductNumber:function(){
-    for (var i = 0; i < this.data.productData.length;i++){
-      for (var j = 0; j < this.data.productData[i].products.length;j++){
-        this.data.productData[i].products[j].number = 0;
-      }
-    }
-  },
   /* 点击单个种类属性 */
   ClickCategoryMethod: function (e) {
     var Index = e.currentTarget.dataset.numid;
     console.log("XXXXX" + Index);
     this.setData({
       CurrentCategoryPostion: Index,
-      product_items: this.data.productData[Index].products
+      product_items: this.data.product_categories[Index].products,
     });
   },
   /* 点击单产品添加按钮事件 */
   AddFoodNumMethod:function(e){
     var Index = e.currentTarget.dataset.numid;
-    console.log("添加商品:" + this.data.productData[this.data.CurrentCategoryPostion].products[Index].name);
-    this.data.productData[this.data.CurrentCategoryPostion].products[Index].number++;
-    console.log("数量为=" + this.data.productData[this.data.CurrentCategoryPostion].products[Index].number);
-    this.setData({
-      product_items: this.data.productData[this.data.CurrentCategoryPostion].products
-    })
+    console.log("添加商品:" + this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].name);
+    this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number++;
+    console.log("数量为=" + this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number);
+    this.UpdataUi(); 
   },
   /* 点击单产品减少按钮事件 */
   ReduceFoodNumMethod:function(e){
     var Index = e.currentTarget.dataset.numid;
-    console.log("减少商品:" + this.data.productData[this.data.CurrentCategoryPostion].products[Index].name);
-    if (this.data.productData[this.data.CurrentCategoryPostion].products[Index].number>0)
-      this.data.productData[this.data.CurrentCategoryPostion].products[Index].number--;
+    console.log("减少商品:" + this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].name);
+    if (this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number>0)
+      this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number--;
     else
-      this.data.productData[this.data.CurrentCategoryPostion].products[Index].number = 0;
+      this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number = 0;
+    this.UpdataUi(); 
+  },
+  /* 点击菜单单产品增加按钮事件 */
+  AddMenuNumMethod: function (e) {
+    var productId = e.currentTarget.dataset.numid;
+    for (var i = 0; i < this.data.product_categories.length; i++) {
+      for (var j = 0; j < this.data.product_categories[i].products.length; j++) {
+        if (this.data.product_categories[i].products[j].id == productId) {
+          this.data.product_categories[i].products[j].number++;
+          break;
+        }
+      }
+    }
+    this.UpdataUi();
+  },
+  /* 点击菜单单产品减少按钮事件 */
+  ReduceMenuNumMethod: function (e) {
+    var productId = e.currentTarget.dataset.numid;
+    for (var i = 0; i < this.data.product_categories.length; i++) {
+      for (var j = 0; j < this.data.product_categories[i].products.length; j++) {
+        if (this.data.product_categories[i].products[j].id == productId) {
+          this.data.product_categories[i].products[j].number--;
+          break;
+        }
+      }
+    }
+    this.UpdataUi();
+  },  
+  ClickCleanBuyCarMethod:function(e){
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确认清空购物车？',
+      success:function(res){
+        if(res.confirm){
+          that.setData({
+            product_categories: postData.postList.product_categories,     //全部商品
+            product_items: postData.postList.product_categories[that.data.CurrentCategoryPostion].products
+          })
+        }
+      }
+    })
+  },
+  /* 刷新菜单和其他UI  */
+  UpdataUi: function () {
+    var money = 0;
+    for (var i = 0; i < this.data.product_categories.length; i++) {
+      for (var j = 0; j < this.data.product_categories[i].products.length; j++) {
+        if (this.data.product_categories[i].products[j].number != 0) {
+          money += this.data.product_categories[i].products[j].number * this.data.product_categories[i].products[j].origin_price;
+        }
+      }
+    }
     this.setData({
-      product_items: this.data.productData[this.data.CurrentCategoryPostion].products
-    })  
+      TotalPrice: "￥" + money.toFixed(2) + "元",
+      product_items: this.data.product_categories[this.data.CurrentCategoryPostion].products,
+      product_categories: this.data.product_categories
+    })
+  },
+  /* 显示购物车  */
+  showModal: function () {
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  /*  隐藏购物车  */
+  hideModal: function () {
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   }
 })
-
-
 
 /*
     第一次进入初始化

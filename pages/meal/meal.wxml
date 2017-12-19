@@ -16,11 +16,16 @@
          </view>
    </view>
 </view>
+
+<!--店铺活动展示 -->
 <view class='ActivityInfo'>
   <text class="ActivityInfo_txt">店铺活动：{{ShopActivity_txt}}</text>
 </view>
+
+<!--商品界面展示 -->
  <view class="ShowLayout"> 
-    <view class="CategoryLayout">
+    <!--商品的种类 -->
+     <scroll-view class="CategoryLayout"scroll-y="true" scroll-top="0">
       <block wx:for="{{product_categories}}" wx:key="code">
         <view 
           class='CategoryItemLayout'
@@ -33,8 +38,9 @@
             </view>    
         </view>  
       </block>
-    </view>
-    <scroll-view class="ProductLayout" style="height:70%;" scroll-y="true" scroll-top="0">
+     </scroll-view> 
+    <!--商品展示 -->
+    <scroll-view class="ProductLayout"scroll-y="true" scroll-top="0">
       <block wx:for="{{product_items}}" wx:key="id">
         <view class='ProductItemLayout'>
              <image class="ProductItemPhoto" src="../image/loading.png"/>
@@ -53,9 +59,39 @@
     </scroll-view> 
  </view> 
 
+<!--弹出购物车框  屏幕背景变暗的背景  -->
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view class="BuyCarItemTitleLayout">
+          <view class="BuyCarItemTitleLeftLayout">
+            <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
+            <text class="BuyCatItemTitle_txt">已选商品</text>
+          </view>
+          <view class="BuyCarItemTitleRightLayout" bindtap='ClickCleanBuyCarMethod'>
+            <image class="BuyCarItemCleanIcon" src="../image/cleanlogo.png"/>
+          </view>
+    </view>
+    <scroll-view class="BuyCarItemLayout" scroll-y="true" scroll-top="0">
+      <view wx:for="{{product_categories}}" wx:key="code">
+        <block wx:for="{{item.products}}" wx:for-item="products" wx:key="id">
+            <view class="MenuItemLayout" wx:if="{{products.number>0}}">
+              <text class="MenuItemName">{{products.name}}</text>
+              <text class="MenuItemPrice">￥{{products.origin_price}}</text>
+              <view class="MenuItemNumberLayout">
+                <image class="MenuItemReduceImage" data-numid="{{products.id}}"bindtap="ReduceMenuNumMethod"src="../image/reduce.png"></image>
+                  <text class="MenuItemNumberText" >{{products.number}}</text>
+                <image class="MenuItemAddImage" data-numid="{{products.id}}"bindtap="AddMenuNumMethod" src="../image/add.png"></image>
+              </view>
+            </view>
+        </block>
+      </view> 
+    </scroll-view> 
+</view>
+
+<!--底栏信息 -->
 <view class="BuyFoodLayout">
-   <image class="BuyCarIcon" src="../image/buycaricon.png"/>
-   <text class="BuyFoodPrice_txt">￥0.0元 </text>
+   <image class="BuyCarIcon" src="../image/buycaricon.png" bindtap="showModal"/>
+   <text class="BuyFoodPrice_txt">{{TotalPrice}} </text>
 </view>
 <view class="CheckOrderLayout">
   <view class="CheckOrderTxt">去结算</view>

@@ -80,11 +80,11 @@
   flex-direction: row;
   background-color:gainsboro;
   top: 200rpx;
+  align-items: center;
 }
 .ActivityInfo_txt{
   font-size: 25rpx;
   margin-left: 30rpx;
-  margin-top: 10rpx;
   color: red;
 }
 .ShowLayout{
@@ -99,7 +99,7 @@
   display: flex;
   flex-direction: column;
   width: 180rpx;
-  height: 100%;
+  height:70%;
   background: whitesmoke;
 }
 .CategoryItemLayout{
@@ -124,6 +124,7 @@
    flex-direction: column;
    background: white;
    width: 80%;
+   height:70%;
 }
 .ProductItemLayout{
   display: flex;
@@ -179,7 +180,6 @@
 .ImageShow{
   width:50rpx;
   height:50rpx;
- 
 }
 .ImageHide{
   width:50rpx;
@@ -187,7 +187,7 @@
   display: none; 
 }
 .TextShow{
- font-size: 30rpx;
+  font-size: 30rpx;
   font-weight:bold;
   color: black;
   margin-top: 5rpx;
@@ -201,6 +201,118 @@
 .add_btn{
   width:50rpx;
   height:50rpx;
+}
+
+/*使屏幕变暗  */
+.commodity_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+
+/*对话框 */
+.commodity_attr_box {
+  height: 400rpx;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 100rpx;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+}
+.BuyCarItemTitleLayout{
+  height: 60rpx;
+  width: 100%;
+  background: #ECECEE;
+  display: flex;
+  flex-direction: row;
+}
+.BuyCarItemTitleLeftLayout{
+  align-items: center;
+  display: flex;
+  width: 180rpx;
+  flex-direction: row;
+}
+.BuyCarItemTitleRightLayout{
+  align-items: center;
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  margin-right: 10rpx;
+}
+.BuyCarItemLogo{
+  width:30rpx;
+  height:30rpx;
+}
+.BuyCatItemTitle_txt{
+  font-size: 25rpx;
+  font-weight:bold;
+  color: black;
+  display: block;
+}
+.BuyCarItemCleanIcon{
+  width:30rpx;
+  height:30rpx;
+}
+.BuyCarItemLayout{
+  background: white;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+.MenuItemLayout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60rpx;
+  padding: 5px 0;
+  border-bottom: 1px solid #ededed;
+}
+.MenuItemName{
+  font-size: 30rpx;
+  color: black;
+  margin-left: 30rpx;
+  width: 400rpx;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+.MenuItemPrice{
+  width: 140rpx;
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  color: #FF6101;
+}
+.MenuItemNumberLayout{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20rpx;
+}
+.MenuItemReduceImage{
+  width:40rpx;
+  height:40rpx;
+}
+.MenuItemNumberText{
+  font-size: 30rpx;
+  font-weight:bold;
+  color: black;
+  width: 20rpx;
+  text-align: center;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.MenuItemAddImage{
+  width:40rpx;
+  height:40rpx;
 }
 
 .BuyFoodLayout{
