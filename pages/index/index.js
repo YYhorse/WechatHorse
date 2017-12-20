@@ -4,67 +4,31 @@ const app = getApp()
 
 Page({
   data:{
-    // message:'Hello CG!',
-    // // array:[1,2,3,4,5],
-    // iconSize: [20, 30, 40, 50, 60, 70],
-    // count:1
-  
-    "testData": {
-      "a": [{
-        "id": "1-1",
-        "name": "节点1 - 1"
-      }, {
-        "id": "1-2",
-        "name": "节点1 - 2"
-      }],
-      "b": [{
-        "id": "2-1",
-        "name": "节点2 - 1"
-      }, {
-        "id": "2-2",
-        "name": "节点2 - 2"
-      }]
-    },
-    
-    "student":[
-      {
-        "name":"张三",
-        "age":"22",
-        "sex":"男孩"
-      },{
-        "name": "李四",
-        "age": "24",
-        "sex": "女孩"
-      }, {
-        "name": "王五",
-        "age": "25",
-        "sex": "男孩"
-      }
+    imgUrls: [
+       "../image/1.png",
+       "../image/2.png",
+       "../image/3.jpg",
+       "../image/4.png"
     ],
-    currentItemId: 0,
-    totalname:""  
+    userName: "支付0.01元"
   },
-  onLoad: function () {
-    this.setData({
-      totalname: this.TotalNameMethod()
+  ClickUserNameMethod:function(e){
+    var that = this;
+    wx.request({
+      url: "https://api.weixin.qq.com/sns/jscode2session?appid=wx67d99485486f6d49&secret=a8e46134e42279e3bd1c9c6b1546fa58&js_code=" + app.globalData.code + "&grant_type=authorization_code",
+      data:{},
+      method:'GET',
+      success:function(res){
+        console.log('返回openId')
+        console.log(res.data)
+      },
+      fail: function () {
+        console.log('失败openId')
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
     })
-  },
-  clickTap: function (e) {
-    var Index = e.currentTarget.dataset.numid;
-    console.log("XXXXX"+Index);
-    this.setData({
-      currentItemId: Index
-    });
-    wx.showToast({
-      title: this.data.student[Index].name,
-    })
-  },
-
-  TotalNameMethod:function(){
-    var temp = "";
-    for(var i =0;i<this.data.student.length;i++){
-      temp +=this.data.student[i].name;
-    }
-    return temp;
   }
 })

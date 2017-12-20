@@ -1,0 +1,9 @@
+.ShowAd{
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+.userInfo{
+  font-size: 30rpx;
+  margin-top: 50rpx;
+}
