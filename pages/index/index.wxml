@@ -1,23 +1,4 @@
 <!--index.wxml-->
- <!-- <view class="container">
-       <text class="user-motto">小程序点餐，方便快捷</text>
-      <image 
-        class='img'
-        src="../image/1.png" 
-        />  
-        <image 
-        class='img'
-        src="../image/2.png" 
-        />  
-         <image 
-         class='img'
-        src="../image/3.jpg" 
-        /> 
-        <image
-        class='img'
-        src="../image/4.png"
-        />  
-</view>  -->
 <view class='ShowAd'>
   <swiper indicator-dots="false"
     autoplay="true" interval="2000" duration="500">

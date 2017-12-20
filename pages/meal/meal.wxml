@@ -89,10 +89,20 @@
 </view>
 
 <!--底栏信息 -->
-<view class="BuyFoodLayout">
-   <image class="BuyCarIcon" src="../image/buycaricon.png" bindtap="showModal"/>
-   <text class="BuyFoodPrice_txt">{{TotalPrice}} </text>
-</view>
-<view class="CheckOrderLayout">
-  <view class="CheckOrderTxt">去结算</view>
+<view class="shopCart">
+  <view class="content" bindtap="showModal">
+    <view class="content-left">
+      <view class="logo-wrapper">
+        <view class="logo highlight">
+          <view class="iconfont icon-gouwuche highlight"></view>
+        </view>
+        <view class="num" wx:if="{{TotalCount> 0}}">{{TotalCount}}</view>
+      </view>
+       <view class="price highlight">{{TotalPrice}}</view>
+       <view class="desc">减免￥{{deliveryPrice}}元</view>
+    </view>
+    <view class="content-right" catchtap="pay">
+      <view class="pay enough">去结算</view>
+    </view>
+  </view>
 </view>

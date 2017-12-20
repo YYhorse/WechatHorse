@@ -10,7 +10,9 @@ Page({
        "../image/3.jpg",
        "../image/4.png"
     ],
-    userName: "支付0.01元"
+    userName: "支付0.01元",
+    totalCount:10,
+    totalPrice:123.4
   },
   ClickUserNameMethod:function(e){
     var that = this;

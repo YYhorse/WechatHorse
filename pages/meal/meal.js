@@ -8,6 +8,7 @@ Page({
     product_categories:"",
     product_items:"",
     TotalPrice:"￥0.0元",
+    TotalCount:0,
     showModalStatus:false,
   },
   onLoad:function(){
@@ -92,6 +93,8 @@ Page({
       success:function(res){
         if(res.confirm){
           that.setData({
+            TotalCount:0,
+            TotalPrice: "￥0元",
             product_categories: postData.postList.product_categories,     //全部商品
             product_items: postData.postList.product_categories[that.data.CurrentCategoryPostion].products
           })
@@ -101,16 +104,19 @@ Page({
   },
   /* 刷新菜单和其他UI  */
   UpdataUi: function () {
+    var count = 0;
     var money = 0;
     for (var i = 0; i < this.data.product_categories.length; i++) {
       for (var j = 0; j < this.data.product_categories[i].products.length; j++) {
         if (this.data.product_categories[i].products[j].number != 0) {
+          count++;
           money += this.data.product_categories[i].products[j].number * this.data.product_categories[i].products[j].origin_price;
         }
       }
     }
     this.setData({
       TotalPrice: "￥" + money.toFixed(2) + "元",
+      TotalCount: count,
       product_items: this.data.product_categories[this.data.CurrentCategoryPostion].products,
       product_categories: this.data.product_categories
     })
