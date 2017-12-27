@@ -1,6 +1,6 @@
 <!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->
 <view class="ShopInfoMain">
-   <image class="HeadPhoto" src="../image/facelogo.png"/>
+   <image class="HeadPhoto" src="{{HeadPhotoUrl}}" mode="aspectFill"/>
    <view class="ShopTitle">
         <text class="ShopName_txt">{{ShopName_txt}}</text>
         <text class="ShopDescription_txt">{{ShopDescription_txt}}</text>
@@ -43,7 +43,7 @@
     <scroll-view class="ProductLayout"scroll-y="true" scroll-top="0">
       <block wx:for="{{product_items}}" wx:key="id">
         <view class='ProductItemLayout'>
-             <image class="ProductItemPhoto" src="../image/loading.png"/>
+             <image class="ProductItemPhoto" src="{{item.image_path}}" mode="aspectFill"/>
              <view class='ProductItemInfoLayout'>
                 <text class="ProductItemName">{{item.name}}</text>
                 <text class="ProductItemDescription">{{item.description}}</text>
@@ -102,7 +102,7 @@
        <view class="desc">减免￥{{deliveryPrice}}元</view>
     </view>
     <view class="content-right" catchtap="pay">
-      <view class="pay enough">去结算</view>
+      <view class="pay enough" bindtap='ClickCheckOrderMethod'>去结算</view>
     </view>
   </view>
 </view>

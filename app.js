@@ -9,6 +9,9 @@ App({
           wx.getUserInfo({
             success:function(res){
               getApp().globalData.userInfo = res.userInfo
+              wx.showToast({
+                title: res.userInfo.nickName + '欢迎您！',
+              })
               // wx.showModal({
               //   title: '提示',
               //   content: res.userInfo.nickName + '欢迎您！'+"\n"+res.userInfo.gender+"\n"+res.userInfo.province+"\n"+res.userInfo.city,

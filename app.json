@@ -1,7 +1,8 @@
 {
   "pages":[
-  
-    "pages/meal/meal"
+   
+    "pages/meal/meal",
+    "pages/checkorder/checkorder"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -9,7 +10,6 @@
     "navigationBarTitleText": "白龙码",
     "navigationBarTextStyle":"white"
   },
- 
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000

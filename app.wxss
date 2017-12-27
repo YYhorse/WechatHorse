@@ -8,3 +8,34 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+/*
+ "pages/index/index",
+    "pages/join/join",
+
+"tabBar": {
+  "color": "#a9b7b7",
+  "selectedColor": "#eb4f38",
+  "borderStyle": "white",
+  "backgroundColor": "#f3f3f3",
+  "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "textColor": "#eb4f38",
+        "iconPath": "pages/image/home.png"
+      },
+      {
+        "pagePath": "pages/join/join",
+        "text": "我要加盟",
+        "textColor": "#eb4f38",
+        "iconPath": "pages/image/join.png"
+      },
+      {
+        "pagePath": "pages/meal/meal",
+        "text": "我要点餐",
+        "textColor": "#eb4f38",
+        "iconPath": "pages/image/meal.png"
+      }
+    ]
+  },
+  */

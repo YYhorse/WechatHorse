@@ -1,0 +1,178 @@
+.OrderTitle{
+  display: flex;
+  width: 100%;
+  height: 30rpx;
+  font-size: 20rpx;
+  color: gray;
+  margin-left: 20rpx;
+  margin-top: 15rpx;
+}
+.linegray{
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-bottom: 1px solid #ededed;
+}
+.itemgray{
+  align-items: center;
+  display: flex;
+  width: 100%;
+  border-bottom: 10px solid #F8F8F8;
+}
+.TotalOriginPrice{
+  font-size: 30rpx;
+  color: black;
+  margin-right: 50rpx;
+}
+.BuyCarItemLayout{
+  background: white;
+  height:80%;
+  display: flex;
+  flex-direction: column;
+}
+.MenuItemLayout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60rpx;
+  padding: 5px 0;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-bottom: 1px solid #ededed;
+}
+.MenuItemPhoto{
+  width:50rpx;
+  height:50rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+}
+.MenuItemName{
+  font-size: 30rpx;
+  color: black;
+  margin-left: 30rpx;
+  width: 350rpx;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+.MenuItemNumber{
+  width: 250rpx;
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  color:gray;
+}
+.MenuItemPrice{
+  width: 150rpx;
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  color: #FF6101;
+}
+.ActivityInfoLayout{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ActivityInfoImage{
+  width:80rpx;
+  height:60rpx;
+  margin-left: 50rpx;
+  margin-top: 20rpx;
+}
+.ActivityInfoGiftImage{
+  width:80rpx;
+  height:80rpx;
+  margin-left: 50rpx;
+  margin-top: 20rpx;
+}
+.ActivityInfoContextLayout{
+  align-items: center;
+  display: flex;
+  width: 80%;
+  margin-top: 20rpx;
+  flex-direction: row-reverse;
+}
+.ActivityInfoContext{
+  font-size: 30rpx;
+  color: #FF6101;
+  font-weight:bold;
+  margin-right: 20rpx;
+}
+.itemgray2{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 15rpx;
+  border-bottom: 10px solid #F8F8F8;
+}
+.ChoosePayLayout{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.PayImage{
+  width:50rpx;
+  height:50rpx;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+}
+.PayImage2{
+  width:50rpx;
+  height:50rpx;
+  margin-left: 30rpx;
+}
+.PayText{
+  font-size: 30rpx;
+  color: black;
+  margin-left: 30rpx;
+  margin-top: 15rpx;
+}
+.PayLayout{
+  align-items: center;
+  display: flex;
+  width: 60%;
+  margin-top: 20rpx;
+  flex-direction: row-reverse;
+}
+
+
+.BuyFoodLayout{
+  position:fixed;
+  height: 48px;
+  width: 100%;
+  text-align:left;
+  background-color:#141d27;
+  bottom:0rpx;
+}
+.BuyFoodPrice_txt{
+  display: flex;
+  font-size: 20px;
+  font-weight:bold;
+  color: white;
+  margin-left: 20rpx;
+  text-align:center;
+  margin-top: 15rpx;
+}
+.CheckOrderLayout{
+  position:fixed;
+  height:48px;
+  width: 200rpx;
+  background-color:#ff9800;
+  bottom:0rpx;
+  right: 0rpx;
+}
+.CheckOrderTxt{
+  display: flex;
+  font-size: 32rpx;
+  font-weight:bold;
+  color: white;
+  text-align:center;
+  margin-top: 25rpx;
+  margin-left: 50rpx;
+}

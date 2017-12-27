@@ -21,11 +21,17 @@ Page({
       data:{},
       method:'GET',
       success:function(res){
+        wx.showModal({
+          title: '提示',
+          content: "Session_key="+res.data.session_key+"\nOpenid="+res.data.openid,
+        })
         console.log('返回openId')
         console.log(res.data)
       },
       fail: function () {
-        console.log('失败openId')
+        wx.showToast({
+          title: '获取openId失败',
+        })
         // fail
       },
       complete: function () {

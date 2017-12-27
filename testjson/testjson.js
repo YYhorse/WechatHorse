@@ -6,13 +6,23 @@ var localjson = {
           "full_cuts":[
             {
               "type": "full_cut",
-              "full": "100.0",
-              "cut": "10.0"
+              "full": "20.0",
+              "cut": "5.0"
+            },
+            {
+              "type": "full_gift",
+              "full": "30.0",
+              "cut": "网咖特饮"
             },
             {
               "type": "full_gift",
               "full": "50.0",
-              "cut": "网咖特饮"
+              "cut": "一杯酒"
+            },
+            {
+              "type": "full_gift",
+              "full": "10.0",
+              "cut": "可乐"
             }
           ],
             "product_categories":[
@@ -124,17 +134,17 @@ var localjson = {
                     "name": "充值一小时",
                     "description": "网费充值一小时",
                     "image_path": "http://www.whitedragoncode.xyz/uploads/product_image/path/6/1127135105.jpg",
-                    "origin_price": "5.0",
+                    "origin_price": "4.9",
                     "active_price": "4.5",
                     "number": 0
                   },
                   {
                     "id": 7,
-                    "name": "话费充值",
+                    "name": "话费充值测试测试测试挖到哇",
                     "description": "手机话费充值",
                     "image_path": "http://www.whitedragoncode.xyz/uploads/product_image/path/7/1127135339.jpg",
-                    "origin_price": "49.5",
-                    "active_price": "49.0",
+                    "origin_price": "1249.5",
+                    "active_price": "1249.0",
                     "number": 0
                   }
                 ]

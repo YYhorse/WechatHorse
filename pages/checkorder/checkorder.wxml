@@ -1,0 +1,49 @@
+<view class='OrderTitle'>订单详情</view>
+<view class='linegray'></view>
+<scroll-view class="BuyCarItemLayout" scroll-y="true" scroll-top="0">
+ <view wx:for="{{product_categories}}" wx:key="code">
+    <block wx:for="{{item.products}}" wx:for-item="products" wx:key="id">
+      <view class="MenuItemLayout" wx:if="{{products.number>0}}">
+        <image class="MenuItemPhoto" src="../image/loading.png"/>
+        <text class="MenuItemName">{{products.name}}</text>
+        <text class="MenuItemNumber">×{{products.number}}</text>
+        <text class="MenuItemPrice">￥{{products.origin_price*products.number}}</text>
+      </view> 
+    </block>
+  </view> 
+</scroll-view> 
+<view class='itemgray'></view>
+<view class='OrderTitle'>活动详情</view>
+<view class='linegray'></view>
+<view class='ActivityInfoLayout'>
+  <image class='ActivityInfoImage' src="../image/fullcut.png"></image>
+  <view class='ActivityInfoContextLayout'>
+    <text class='ActivityInfoContext'>{{OrderCutActivity}}</text>
+  </view>
+</view>
+<view class='linegray'></view>
+<view class='ActivityInfoLayout'>
+  <image class='ActivityInfoGiftImage' src="../image/fullgift.png"></image>
+  <view class='ActivityInfoContextLayout'>
+    <text class='ActivityInfoContext'>{{OrderGiftActivity}}</text>
+  </view>
+</view>
+<view class='itemgray2'></view>
+<view class='OrderTitle'>请选择支付方式</view>
+<view class='linegray'></view>
+<view class='ChoosePayLayout'>
+  <image class='PayImage' src="../image/wechatpay.png"></image>
+  <text class='PayText'>微信支付</text>
+  <view class='PayLayout'>
+    <image class='PayImage2'src="../image/yes.png"></image>
+  </view>
+</view>
+<view class='itemgray2'></view>
+
+<!--底栏信息 -->
+<view class="BuyFoodLayout">
+   <view class="BuyFoodPrice_txt">应付：￥{{OrderPaidMoney}}元 </view>
+</view>
+<view class="CheckOrderLayout">
+  <view class="CheckOrderTxt">立即支付</view>
+</view>

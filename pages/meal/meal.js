@@ -1,7 +1,9 @@
-var postData = require('../../testjson/testjson.js');
+// var postData = require('../../testjson/testjson.js');
+var postData = "";
 Page({
   data:{
     CurrentCategoryPostion:0,
+    HeadPhotoUrl:"../image/facelogo.png",
     ShopName_txt:"",
     ShopDescription_txt:"",
     ShopActivity_txt:"",
@@ -12,23 +14,39 @@ Page({
     showModalStatus:false,
   },
   onLoad:function(){
+    var that = this;  
     wx.setNavigationBarTitle({  title: '小程序点餐' }),
-    this.setData({
-      ShopName_txt: postData.postList.name,
-      ShopDescription_txt: postData.postList.description,
-      ShopActivity_txt:this.GetActivityInfo(),
-      product_categories: postData.postList.product_categories,     //全部商品
-      product_items: postData.postList.product_categories[this.data.CurrentCategoryPostion].products
+    wx.showLoading({
+      title: '菜单拉取中',
+    }),
+    wx.request({
+      url: 'https://whitedragoncode.cn/api/v1/small_program/stores?',
+      data: { store_id: 1 },
+      header: { "Content-Type": 'application/x-www-form-urlencoded'},
+      success: function (res) {
+        wx.hideLoading()
+        postData = res.data
+        console.log(res.data)
+        console.log(postData.name + postData.description)
+        that.setData({
+          ShopName_txt: postData.name,
+          ShopDescription_txt: postData.description,
+          HeadPhotoUrl: postData.avatar,
+          ShopActivity_txt: that.GetActivityInfo(),
+          product_categories: postData.product_categories,     //全部商品
+          product_items: postData.product_categories[that.data.CurrentCategoryPostion].products
+        })
+      }
     })
   },
   /* 解析活动信息 */
   GetActivityInfo:function(){
     var temp = "";
-    for (var i = 0; i < postData.postList.full_cuts.length;i++){
-      if(postData.postList.full_cuts[i].type=="full_cut")
-        temp += " 满￥" + postData.postList.full_cuts[i].full + "立减￥" + postData.postList.full_cuts[i].cut;
+    for (var i = 0; i < postData.full_cuts.length;i++){
+      if(postData.full_cuts[i].type=="full_cut")
+        temp += " 满￥" + postData.full_cuts[i].full + "立减￥" + postData.full_cuts[i].cut;
       else
-        temp += " 满￥" + postData.postList.full_cuts[i].full + "赠" + postData.postList.full_cuts[i].cut;
+        temp += " 满￥" + postData.full_cuts[i].full + "赠" + postData.full_cuts[i].cut;
     }
     return temp; 
   },
@@ -85,6 +103,7 @@ Page({
     }
     this.UpdataUi();
   },  
+  /*  购物车清空事件  */
   ClickCleanBuyCarMethod:function(e){
     var that = this;
     wx.showModal({
@@ -95,8 +114,8 @@ Page({
           that.setData({
             TotalCount:0,
             TotalPrice: "￥0元",
-            product_categories: postData.postList.product_categories,     //全部商品
-            product_items: postData.postList.product_categories[that.data.CurrentCategoryPostion].products
+            product_categories: postData.product_categories,     //全部商品
+            product_items: postData.product_categories[that.data.CurrentCategoryPostion].products
           })
         }
       }
@@ -119,6 +138,21 @@ Page({
       TotalCount: count,
       product_items: this.data.product_categories[this.data.CurrentCategoryPostion].products,
       product_categories: this.data.product_categories
+    })
+  },
+  /*  点击响应去结算 */
+  ClickCheckOrderMethod:function(e){
+    console.log("点击去结算");
+    //将商品信息转换成字符串 进行界面跳转
+    let productJson = JSON.stringify(this.data.product_categories);
+    let activityJson = JSON.stringify(postData.full_cuts);
+    // console.log("菜单转JSON="+productJson);
+    console.log("活动转JSON=" + activityJson);
+    wx.navigateTo({
+      url: '/pages/checkorder/checkorder?productJson=' + productJson + '&activityJson=' + activityJson,
+      success:function(res){
+        console.log("跳转完成")
+      },
     })
   },
   /* 显示购物车  */
