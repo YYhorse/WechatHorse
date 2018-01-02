@@ -1,8 +1,9 @@
 {
   "pages":[
-   
+    "pages/index/index",
     "pages/meal/meal",
-    "pages/checkorder/checkorder"
+    "pages/checkorder/checkorder",
+    "pages/myorder/myorder"
   ],
   "window":{
     "backgroundTextStyle":"light",

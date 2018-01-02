@@ -1,5 +1,4 @@
-// var postData = require('../../testjson/testjson.js');
-var postData = "";
+var postData = "";      //菜单详情
 Page({
   data:{
     CurrentCategoryPostion:0,
@@ -9,7 +8,7 @@ Page({
     ShopActivity_txt:"",
     product_categories:"",
     product_items:"",
-    TotalPrice:"￥0.0元",
+    TotalPrice:"￥0.00元",
     TotalCount:0,
     showModalStatus:false,
   },
@@ -103,23 +102,99 @@ Page({
     }
     this.UpdataUi();
   },  
+  /*  点击响应呼叫服务 */
+  ClickCallServiceMethod:function(e){
+    var that = this;
+    wx.showModal({
+      title: '呼叫服务',
+      content: '是否确认呼叫店铺服务',
+      cancelText:'取消',
+      cancelColor:"#3f3f3f",
+      confirmText:'呼叫',
+      confirmColor:"#FF0000",
+      success:function(res){
+        if(res.confirm){
+          wx.vibrateLong({})
+          that.CallServiceInface()
+        }
+        else 
+          console.log('用户取消呼叫')
+      }
+    })
+  },
+  CallServiceInface:function(){
+    //呼叫服务 HTTP请求
+    wx.request({
+      url: "https://whitedragoncode.cn/api/v1/small_program/call_clerks",
+      data: { "store_id": "1", "desk_id": "2", "nickname": getApp().globalData.userInfo.nickName, "type": "help" },
+      method: 'POST',
+      success: function (res) {
+        wx.showToast({
+          title: '已为您呼叫成功',
+        })
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '呼叫失败'+res.data,
+        })
+      }
+    })
+  },
+  /*  响应我的订单信息 */
+  ClickMyOrderMethod:function(){
+    wx.request({
+      url: "https://whitedragoncode.cn/api/v1/small_program/orders/history_order",
+      data: { "store_id": "1", "user_id": getApp().globalData.user_id, "page": "0" },
+      method: 'GET',
+      success: function (res) {
+        wx.showToast({
+          title: '成功',
+        })
+        console.log(res.data)
+      },
+      fail: function () {
+        wx.showToast({
+          title: '失败',
+        })
+        console.log(res.data)
+      }
+    })
+  },
+  /*  显示全部活动信息 */
+  ClickActivityInfoShowMethod:function(e){
+    var temp="";
+    for (var i = 0; i < postData.full_cuts.length; i++) {
+      if (postData.full_cuts[i].type == "full_cut")
+        temp += "\n满￥" + postData.full_cuts[i].full + "立减￥" + postData.full_cuts[i].cut;
+      else
+        temp += "\n满￥" + postData.full_cuts[i].full + "赠" + postData.full_cuts[i].cut;
+    }
+    wx.showModal({
+      title: '店铺活动',
+      content: temp,
+    })
+  },
   /*  购物车清空事件  */
   ClickCleanBuyCarMethod:function(e){
     var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确认清空购物车？',
-      success:function(res){
-        if(res.confirm){
-          that.setData({
-            TotalCount:0,
-            TotalPrice: "￥0元",
-            product_categories: postData.product_categories,     //全部商品
-            product_items: postData.product_categories[that.data.CurrentCategoryPostion].products
-          })
+    if (this.data.TotalPrice.substring(1, this.data.TotalPrice.length - 1) != "0.00") {
+      wx.showModal({
+        title: '提示',
+        content: '确认清空购物车？',
+        success:function(res){
+          if(res.confirm){
+            that.setData({
+              TotalCount:0,
+              TotalPrice: "￥0.00元",
+              product_categories: postData.product_categories,     //全部商品
+              product_items: postData.product_categories[that.data.CurrentCategoryPostion].products
+            })
+          }
         }
-      }
-    })
+      })
+    }
+    else
+      wx.showToast({ title: '购物车已为空！', })
   },
   /* 刷新菜单和其他UI  */
   UpdataUi: function () {
@@ -142,18 +217,22 @@ Page({
   },
   /*  点击响应去结算 */
   ClickCheckOrderMethod:function(e){
-    console.log("点击去结算");
-    //将商品信息转换成字符串 进行界面跳转
-    let productJson = JSON.stringify(this.data.product_categories);
-    let activityJson = JSON.stringify(postData.full_cuts);
-    // console.log("菜单转JSON="+productJson);
-    console.log("活动转JSON=" + activityJson);
-    wx.navigateTo({
-      url: '/pages/checkorder/checkorder?productJson=' + productJson + '&activityJson=' + activityJson,
-      success:function(res){
-        console.log("跳转完成")
-      },
-    })
+    console.log("点击去结算" + this.data.TotalPrice.substring(1, this.data.TotalPrice.length-1));
+    if (this.data.TotalPrice.substring(1, this.data.TotalPrice.length - 1)!="0.00"){
+      //将商品信息转换成字符串 进行界面跳转
+      let productJson = JSON.stringify(this.data.product_categories);
+      let activityJson = JSON.stringify(postData.full_cuts);
+      // console.log("菜单转JSON="+productJson);
+      console.log("活动转JSON=" + activityJson);
+      wx.navigateTo({
+        url: '/pages/checkorder/checkorder?productJson=' + productJson + '&activityJson=' + activityJson,
+        success:function(res){
+          console.log("跳转完成")
+        },
+      })
+    }
+    else
+      wx.showToast({title: '请先选购商品',})
   },
   /* 显示购物车  */
   showModal: function () {
@@ -196,23 +275,3 @@ Page({
     }.bind(this), 200)
   }
 })
-
-/*
-    第一次进入初始化
-      wx.showLoading({
-        title: '菜单拉取中',     //wx.hideLoading()
-      })
-      wx.request({
-        url: 'http://111.231.113.11/api/v1/stores?',
-        data:{
-          token:'9f00ed4206b4c8f3b8805478701b2667'
-        },
-        header: {
-          "Content-Type": 'application/x-www-form-urlencoded'
-        },
-        success:function(res){
-          wx.hideLoading(),
-          console.log(res.data)
-        }
-      })
-*/

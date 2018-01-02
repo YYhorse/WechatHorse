@@ -78,14 +78,23 @@
   height:45rpx;
   width: 100%;
   flex-direction: row;
-  background-color:gainsboro;
+  background-color:#00b43c;
   top: 200rpx;
   align-items: center;
 }
 .ActivityInfo_txt{
   font-size: 25rpx;
   margin-left: 30rpx;
-  color: red;
+  color: white;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+.ActivityDown_image{
+  width:30rpx;
+  height:30rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
 }
 .ShowLayout{
   display: flex;

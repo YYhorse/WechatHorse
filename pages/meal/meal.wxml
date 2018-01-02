@@ -1,4 +1,3 @@
-<!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->
 <view class="ShopInfoMain">
    <image class="HeadPhoto" src="{{HeadPhotoUrl}}" mode="aspectFill"/>
    <view class="ShopTitle">
@@ -6,11 +5,11 @@
         <text class="ShopDescription_txt">{{ShopDescription_txt}}</text>
    </view>
    <view class="ShopMessage">
-         <view class="CallService">
+         <view class="CallService" bindtap='ClickCallServiceMethod'>
             <text class="CallServiceTxt">呼叫服务</text>
             <image class="CallServiceIcon" src="../image/callservice.png"/>
          </view>
-         <view class="MyOrder">
+         <view class="MyOrder" bindtap='ClickMyOrderMethod'>
             <text class="CallServiceTxt">我的订单</text>
             <image class="CallServiceIcon" src="../image/myorder.png"/>
          </view>
@@ -18,8 +17,9 @@
 </view>
 
 <!--店铺活动展示 -->
-<view class='ActivityInfo'>
+<view class='ActivityInfo' bindtap='ClickActivityInfoShowMethod'>
   <text class="ActivityInfo_txt">店铺活动：{{ShopActivity_txt}}</text>
+  <image class="ActivityDown_image" src="../image/downlogo.png" mode="aspectFill"/>         
 </view>
 
 <!--商品界面展示 -->
@@ -51,7 +51,7 @@
              </view>
              <view class="ProductItemNumberLayout">
                 <image class="{{item.number>0?'ImageShow':'ImageHide'}}" data-numid="{{index}}"bindtap="ReduceFoodNumMethod"src="../image/reduce.png"></image>
-                    <text class="{{item.number>0?'TextShow':'TextHide'}}" >{{item.number}}</text>
+                    <text class="{{item.number>0?'TextShow':'TextHide'}}"data-numid="{{index}}" bindtap="AddFoodNumMethod"  >{{item.number}}</text>
                 <image class="add_btn" data-numid="{{index}}"bindtap="AddFoodNumMethod" src="../image/add.png"></image>
              </view>
         </view>

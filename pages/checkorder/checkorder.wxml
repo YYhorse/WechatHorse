@@ -4,7 +4,7 @@
  <view wx:for="{{product_categories}}" wx:key="code">
     <block wx:for="{{item.products}}" wx:for-item="products" wx:key="id">
       <view class="MenuItemLayout" wx:if="{{products.number>0}}">
-        <image class="MenuItemPhoto" src="../image/loading.png"/>
+        <image class="MenuItemPhoto" src="{{products.image_path}}" mode="aspectFill"/>
         <text class="MenuItemName">{{products.name}}</text>
         <text class="MenuItemNumber">×{{products.number}}</text>
         <text class="MenuItemPrice">￥{{products.origin_price*products.number}}</text>
@@ -44,6 +44,6 @@
 <view class="BuyFoodLayout">
    <view class="BuyFoodPrice_txt">应付：￥{{OrderPaidMoney}}元 </view>
 </view>
-<view class="CheckOrderLayout">
+<view class="CheckOrderLayout" bindtap='ClickCheckOutPayMethod'>
   <view class="CheckOrderTxt">立即支付</view>
 </view>
