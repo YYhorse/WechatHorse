@@ -1,0 +1,16 @@
+<view class='OrderCodeTitle'>
+  <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
+  <text class='OrderCodeTxt'>订单编号:{{Order_Code}}</text>
+</view>
+<view class='TakeMealNumberLayout'>
+  <view class='TakeMealQueueLayout'>
+    <text class='TakeMealQueueTxt'>取餐号</text>
+    <text class='TakeMealQueueNumber'>{{Queue_No}}</text>
+  </view>
+  <view class='linerowngray'></view>
+  <view class='TakeMealDeskLayout'>
+    <text class='TakeMealQueueTxt'>桌号</text>
+    <text class='TakeMealDeskName'>{{Desk_Name}}</text>
+  </view>
+</view>
+<view class='linecolumngray'></view>

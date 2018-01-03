@@ -1,5 +1,4 @@
 <!--店铺活动展示 -->
-
 <view class="bottomMiddleHeaderItem" animation="{{animationMiddleHeaderItem}}">
    <view class="bottomMiddleHeaderItemSubView">请授权</view>
 </view>

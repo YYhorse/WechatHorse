@@ -16,7 +16,7 @@ Page({
     var that = this;  
     wx.setNavigationBarTitle({  title: '小程序点餐' }),
     wx.showLoading({
-      title: '菜单拉取中',
+      title: '菜单拉取中',  
     }),
     wx.request({
       url: 'https://whitedragoncode.cn/api/v1/small_program/stores?',
@@ -142,22 +142,8 @@ Page({
   },
   /*  响应我的订单信息 */
   ClickMyOrderMethod:function(){
-    wx.request({
-      url: "https://whitedragoncode.cn/api/v1/small_program/orders/history_order",
-      data: { "store_id": "1", "user_id": getApp().globalData.user_id, "page": "0" },
-      method: 'GET',
-      success: function (res) {
-        wx.showToast({
-          title: '成功',
-        })
-        console.log(res.data)
-      },
-      fail: function () {
-        wx.showToast({
-          title: '失败',
-        })
-        console.log(res.data)
-      }
+    wx.navigateTo({
+      url: '/pages/myorder/myorder'
     })
   },
   /*  显示全部活动信息 */
@@ -226,9 +212,6 @@ Page({
       console.log("活动转JSON=" + activityJson);
       wx.navigateTo({
         url: '/pages/checkorder/checkorder?productJson=' + productJson + '&activityJson=' + activityJson,
-        success:function(res){
-          console.log("跳转完成")
-        },
       })
     }
     else

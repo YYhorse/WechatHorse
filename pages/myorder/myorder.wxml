@@ -1,1 +1,3 @@
-<view class="UserinfoLayout"></view>
+<view class="UserinfoLayout">
+  <image class='HeadPhoto'></image>  
+</view>

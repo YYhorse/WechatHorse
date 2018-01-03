@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/meal/meal",
     "pages/checkorder/checkorder",
-    "pages/myorder/myorder"
+    "pages/myorder/myorder",
+    "pages/payfinish/payfinish"
   ],
   "window":{
     "backgroundTextStyle":"light",

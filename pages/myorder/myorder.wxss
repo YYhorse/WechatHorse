@@ -1,5 +1,6 @@
 .UserinfoLayout{
   width: 100%;
-  height: 150rpx;
-  background-color: red;
+  height: 200rpx;
+  background-color: #ff9800;
+  flex-direction: ccolumn;
 }

@@ -16,9 +16,12 @@ Page({
                 success: function (res) {
                   getApp().globalData.user_id = res.data.user_id;
                   console.log(res.data);
+                  // wx.navigateTo({
+                  //   url: '/pages/meal/meal'
+                  // })
                   wx.navigateTo({
-                    url: '/pages/meal/meal'
-                  })
+                    url: '/pages/payfinish/payfinish?order_code=' + '2018010300006',
+                  })  
                   wx.showToast({
                     title: getApp().globalData.userInfo.nickName + '欢迎您！',
                   })

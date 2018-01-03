@@ -1,4 +1,3 @@
-var MD5Util = require('../../utils/md5.js');  
 Page({
   data: {
     product_categories: "",
@@ -78,67 +77,50 @@ Page({
   },
   /*   立即支付  */
   ClickCheckOutPayMethod: function () {
-    // wx.request({
-    //   url: "https://whitedragoncode.cn/api/v1/small_program/orders",
-    //   data: { "store_id": "1", "desk_id": "1", "user_id": getApp().globalData.user_id, "order": this.data.Menu_info },
-    //   method: 'POST',
-    //   success: function (res) {
-    //     //{status_code: 200, prepay_id: "wx2018010208592704c3a565710965700126", order_code: "2018010200001"}
-    //     wx.showToast({
-    //       title: '成功',
-    //     })
-    //     console.log(res.data)
-    //   },
-    //   fail: function () {
-    //     wx.showToast({
-    //       title: '失败',
-    //     })
-    //     console.log(res.data)
-    //   }
-    // })
-    var randomString = this.randomString();//随机字符串
-    var timeStamp = this.timeStamp();//时间戳
-    var MixedencryMD5 = this.MixedencryMD5("wx20180102164646d66a2cf5e10075006407", randomString, timeStamp);//拼接字符串
-    var paysign = MD5Util.MD5(MixedencryMD5).toUpperCase();  //加密MD5
-    console.log(MixedencryMD5);
-    console.log(paysign);
-    wx.requestPayment({
-      timeStamp: timeStamp,
-      nonceStr: randomString,
-      package: 'prepay_id=' + "wx20180102164646d66a2cf5e10075006407",
-      signType: 'MD5',
-      paySign: paysign,
-      success:function(res){
-        wx.showToast({
-          title: '成功',
-        })
+    var that = this;
+    var Order_code = "";
+    wx.request({
+      url: "https://whitedragoncode.cn/api/v1/small_program/orders",
+      data: { "store_id": "1", "desk_id": "1", "user_id": getApp().globalData.user_id, "order": that.data.Menu_info },
+      method: 'POST',
+      success: function (res) {
         console.log(res.data)
+        if (res.data.status_code==200){
+          Order_code = res.data.order_code;
+          wx.requestPayment({
+            timeStamp: res.data.timeStamp,
+            nonceStr: res.data.nonceStr,
+            package: res.data.package,
+            signType: 'MD5',
+            paySign: res.data.paySign,
+            success: function (res) {
+              wx.showToast({
+                title: '支付成功',
+              })
+              wx.navigateTo({
+                url: '/pages/payfinish/payfinish?order_code=' + Order_code,
+              })  
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '支付失败',
+              })
+              console.log(res.data)
+            }
+          })
+        }
+        else{
+          wx.showToast({
+            title: '支付接口返回错误',
+          })
+        }
       },
-      fail: function (res) {
+      fail: function () {
         wx.showToast({
           title: '失败',
         })
         console.log(res.data)
       }
     })
-  },
-  //================================微信支付================================//
-  /* 随机数 */
-  randomString:function(){
-    var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-    var maxPos = chars.length;
-    var pwd = '';
-    for(var i = 0; i< 32; i++) {
-      pwd += chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-    return pwd;
-  },
-  /* 时间戳 */
-  timeStamp:function() {
-    return parseInt(new Date().getTime() / 1000) + ''
-  },
-  /* 调起支付签名 */
-  MixedencryMD5: function (res_paydata, randomString, timeStamp){
-    return "appId=" + "wx67d99485486f6d49" + "&nonceStr=" + randomString + "&package=prepay_id=" + res_paydata + "&signType=MD5" + "&timeStamp=" + timeStamp + "&key=" + "a8e46134e42279e3bd1c9c6b1546fa58";  
   }
 })
