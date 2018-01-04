@@ -2,5 +2,70 @@
   width: 100%;
   height: 200rpx;
   background-color: #ff9800;
-  flex-direction: ccolumn;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.HeadPhoto{
+  display: flex;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 0 20rpx;
+  border-radius: 50%;
+}
+.UserNameTxt{
+  font-size: 20dp;
+  color: white;
+  margin-top: 10rpx;
+  font-weight: bold;
+}
+.linecolumngray{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  border-bottom: 10px solid #ededed;
+}
+.OrderLayout{
+  background: white;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+.OrderItemLayout{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  height: 80rpx;
+  padding: 5px 0;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-bottom: 1px solid #ededed;
+}
+.OrderTime{
+  font-size: 20rpx;
+  color:gray;
+}
+.MenuInfoLayout{
+  width: 320rpx;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+  display: flex;
+  flex-direction: row;
+}
+.MenuInfo{
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  color: black;
+}
+.MenuItemPrice{
+  width: 150rpx;
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  color: red;
+}
+.rightlogo{
+  width: 20rpx;
+  height: 20rpx;
 }

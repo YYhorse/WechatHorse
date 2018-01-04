@@ -16,12 +16,15 @@ Page({
                 success: function (res) {
                   getApp().globalData.user_id = res.data.user_id;
                   console.log(res.data);
-                  // wx.navigateTo({
-                  //   url: '/pages/meal/meal'
-                  // })
                   wx.navigateTo({
-                    url: '/pages/payfinish/payfinish?order_code=' + '2018010300006',
-                  })  
+                    url: '/pages/meal/meal'
+                  })
+                  // wx.navigateTo({
+                  //   url: '/pages/myorder/myorder'
+                  // })
+                  // wx.navigateTo({
+                  //   url: '/pages/payfinish/payfinish?order_code=' + '2018010300006',
+                  // })  
                   wx.showToast({
                     title: getApp().globalData.userInfo.nickName + '欢迎您！',
                   })
@@ -72,5 +75,3 @@ Page({
     }.bind(this), 1000);
   }
 })
-
-//res.userInfo.nickName + '欢迎您！'+"\n"+res.userInfo.gender+"\n"+res.userInfo.province+"\n"+res.userInfo.city,

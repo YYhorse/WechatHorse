@@ -1,4 +1,9 @@
 Page({
+  data: {
+    HeadPhoto:"",
+    UserName:"",
+    Order:"",
+  },
   onLoad: function () {
     var that = this;
     wx.setNavigationBarTitle({ title: '店铺订单' }),
@@ -10,6 +15,11 @@ Page({
       success: function (res) {
         wx.hideLoading()
         console.log(res.data)
+        that.setData({
+          HeadPhoto: getApp().globalData.userInfo.avatarUrl,
+          UserName: getApp().globalData.userInfo.nickName,
+          Order: res.data.order,
+        });
       },
       fail: function () {
         wx.hideLoading()
@@ -19,5 +29,14 @@ Page({
         console.log(res.data)
       }
     })  
+  },
+  ClickOrderMethod:function(e){
+    var Index = e.currentTarget.dataset.numid;
+    console.log("XXXXX" + Index);
+    let orderJson = JSON.stringify(this.data.Order[Index]);
+    console.log("订单转JSON=" + orderJson);
+    wx.navigateTo({
+      url: '/pages/payfinish/payfinish?orderJson=' + orderJson,
+    })
   }
 })

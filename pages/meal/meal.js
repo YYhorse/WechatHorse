@@ -27,6 +27,8 @@ Page({
         postData = res.data
         console.log(res.data)
         console.log(postData.name + postData.description)
+        getApp().globalData.shop_name = postData.name
+        getApp().globalData.shop_head = postData.avatar
         that.setData({
           ShopName_txt: postData.name,
           ShopDescription_txt: postData.description,

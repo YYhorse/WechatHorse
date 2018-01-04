@@ -10,7 +10,63 @@
   <view class='linerowngray'></view>
   <view class='TakeMealDeskLayout'>
     <text class='TakeMealQueueTxt'>桌号</text>
-    <text class='TakeMealDeskName'>{{Desk_Name}}</text>
+    <text class='TakeMealDeskName' style="font-size:{{Desk_fontSize}}pt">{{Desk_Name}}</text>
+  </view>
+</view>
+<view class='MenuTitle'>
+  <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
+  <text class='OrderCodeTxt'>我的菜单</text>
+</view>
+<block wx:for="{{Meanu_info}}" wx:key="code">
+  <view class="MenuItemLayout">
+     <image class="MenuItemPhoto" src="{{item.product_image}}" mode="aspectFill"/> 
+    <text class="MenuItemName">{{item.product_name}}</text>
+    <text class="MenuItemNumber">×{{item.product_number}}</text>
+    <text class="MenuItemPrice">￥{{item.product_price*item.product_number}}</text>
+  </view>  
+</block>
+<view wx:if="{{Activity_info.length>0}}">
+  <view class='MenuTitle'>
+    <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
+    <text class='OrderCodeTxt'>店铺活动</text>
+  </view>
+  <block wx:for="{{Activity_info}}" wx:key="code">
+     <!-- <image class='ActivityImage' src="{{item.type==full_cut?../image/fullcut.png:../image/fullgift.png}}" mode="aspectFill">  -->
+    <view class='ActivityInfoContextLayout'>
+      <text class='ActivityInfoContext'>{{item_cut}}   {{item_full}}</text>
+    </view>
+  </block>
+</view>
+<view class='MenuTitle'>
+  <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
+  <text class='OrderCodeTxt'>账单详情</text>
+</view>
+<view class='OneRowTwoDataLayout'>
+  <text class='FirstDataTxt'>下单时间</text>
+  <view class='SecondDataLayout'>
+    <text class='SecondDataTxt'>{{OrderTime}}</text>
   </view>
 </view>
 <view class='linecolumngray'></view>
+<view class='OneRowTwoDataLayout'>
+  <text class='FirstDataTxt'>订单总计</text>
+  <view class='SecondDataLayout'>
+    <text class='SecondDataTxt'>￥{{OrderReceivableMoney}}元</text>
+  </view>
+</view>
+<view class='linecolumngray'></view>
+
+<view class='MenuTitle2'>
+  <image class="BuyCarItemLogo"src="../image/tiao.png"/> 
+  <text class='ActualTxt'>实付</text>
+  <view class='SecondDataLayout'>
+    <text class='SecondData2Txt'>￥{{OrderPaidMoney}}元</text>
+  </view>
+</view>
+<view class='linecolumngray'></view>
+<view class='SuccessLayout'>
+  <image class="SuccessPhoto" src="../image/yes.png" mode="aspectFill"/>
+  <text class="SuccessTxt">交易成功</text>
+</view>
+<!--底栏信息 -->
+<view class="BuyFoodLayout" animation="{{animationMiddleHeaderItem}}" bindtap='ClickContinueShop'>继续购物</view>

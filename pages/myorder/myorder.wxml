@@ -1,3 +1,19 @@
 <view class="UserinfoLayout">
-  <image class='HeadPhoto'></image>  
+  <image class='HeadPhoto' src="{{HeadPhoto}}" background-size="cover" mode="aspectFill"></image>  
+  <text class='UserNameTxt'>{{UserName}}</text>
 </view>
+<view class='linecolumngray'></view>
+<scroll-view class="OrderLayout" scroll-y="true" scroll-top="0">
+  <view wx:for="{{Order}}" wx:key="code">
+    <view class="OrderItemLayout" data-numid="{{index}}" bindtap="ClickOrderMethod">
+      <text class="OrderTime">{{item.created_at}}</text>
+      <view class='MenuInfoLayout'>
+        <block wx:for="{{item.menu_info}}" wx:for-item="menuinfo" wx:key="id">
+            <text class='MenuInfo'>{{menuinfo.product_name}}</text>
+        </block>
+      </view>
+      <text class="MenuItemPrice">￥{{item.actual_total_price}}元</text>  
+      <image class='rightlogo' src='../image/right.png'></image>
+    </view>
+  </view> 
+</scroll-view> 

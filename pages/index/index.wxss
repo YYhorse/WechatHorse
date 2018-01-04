@@ -3,6 +3,18 @@ page {
   min-height: 100%;  
   background-color: #ff9800;  
 }  
+
+.ReGetRoot{
+  position: fixed;
+  display: flex;
+  bottom: 400px;
+  width: 300rpx;
+  height: 60rpx;
+  margin-left: 250rpx;
+  align-items: center;
+  background-color: white;
+  flex-direction: column;
+}
 .bottomMiddleHeaderItem{
   position: fixed;
   display: flex;
