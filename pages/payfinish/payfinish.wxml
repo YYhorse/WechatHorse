@@ -30,12 +30,19 @@
     <image class="BuyCarItemLogo" src="../image/tiao.png"/> 
     <text class='OrderCodeTxt'>店铺活动</text>
   </view>
-  <block wx:for="{{Activity_info}}" wx:key="code">
-     <!-- <image class='ActivityImage' src="{{item.type==full_cut?../image/fullcut.png:../image/fullgift.png}}" mode="aspectFill">  -->
+  <view class='ActivityInfoLayout'>
+    <image class='ActivityInfoImage' src="../image/fullcut.png"></image>
     <view class='ActivityInfoContextLayout'>
-      <text class='ActivityInfoContext'>{{item_cut}}   {{item_full}}</text>
+      <text class='ActivityInfoContext'>{{OrderCutActivity}}</text>
     </view>
-  </block>
+  </view>
+  <view class='linecolumngray'></view>
+  <view class='ActivityInfoLayout'>
+    <image class='ActivityInfoGiftImage' src="../image/fullgift.png"></image>
+    <view class='ActivityInfoContextLayout'>
+      <text class='ActivityInfoContext'>{{OrderGiftActivity}}</text>
+    </view>
+  </view>
 </view>
 <view class='MenuTitle'>
   <image class="BuyCarItemLogo" src="../image/tiao.png"/> 

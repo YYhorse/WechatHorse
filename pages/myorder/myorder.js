@@ -10,7 +10,7 @@ Page({
     wx.showLoading({  title: '历史订单拉取中',}),
     wx.request({
       url: "https://whitedragoncode.cn/api/v1/small_program/orders/history_order",
-      data: { "store_id": "1", "user_id": getApp().globalData.user_id, "page": "0" },
+      data: { "store_id": getApp().globalData.store_id, "user_id": getApp().globalData.user_id, "page": "0" },
       method: 'GET',
       success: function (res) {
         wx.hideLoading()
@@ -32,7 +32,6 @@ Page({
   },
   ClickOrderMethod:function(e){
     var Index = e.currentTarget.dataset.numid;
-    console.log("XXXXX" + Index);
     let orderJson = JSON.stringify(this.data.Order[Index]);
     console.log("订单转JSON=" + orderJson);
     wx.navigateTo({

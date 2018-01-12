@@ -25,7 +25,7 @@ Page({
     for (var i = 0; i < this.data.product_categories.length; i++) {
       for (var j = 0; j < this.data.product_categories[i].products.length; j++) {
         if (parseInt(this.data.product_categories[i].products[j].number) != 0) {
-          money += parseInt(this.data.product_categories[i].products[j].number) * parseInt(this.data.product_categories[i].products[j].origin_price);
+          money += parseInt(this.data.product_categories[i].products[j].number) * (this.data.product_categories[i].products[j].origin_price);
           menuinfo += "{\"product_id\":\"" + this.data.product_categories[i].products[j].id + "\",\"product_number\":\"" + this.data.product_categories[i].products[j].number + "\"},"
         }
       }
@@ -42,17 +42,17 @@ Page({
     var temp = 0;
     for (var i = 0; i < this.data.activity_info.length; i++) {
       if (this.data.activity_info[i].type == "full_cut" 
-        && this.data.OrderReceivableMoney >= parseInt(this.data.activity_info[i].full)) {
+        && this.data.OrderReceivableMoney >= (this.data.activity_info[i].full)) {
         // console.log("满减活动有:" + this.data.activity_info[i].full + "减" + this.data.activity_info[i].cut);
         //获取最优满减
-        if (parseInt(this.data.activity_info[i].cut)>temp)
-          temp = parseInt(this.data.activity_info[i].cut);
+        if (this.data.activity_info[i].cut>temp)
+          temp = this.data.activity_info[i].cut;
       }
     }
     console.log("最优满减="+temp);
     this.setData({
       OrderCutActivity: temp != 0 ?"减￥"+temp+"元":"无",
-      OrderPaidMoney: this.data.OrderReceivableMoney - temp,
+      OrderPaidMoney: (this.data.OrderReceivableMoney - temp).toFixed(2),
     })
   },
   /*   获取满足条件的满赠活动 */
@@ -61,11 +61,11 @@ Page({
     var temp2 = "无";
     for (var i = 0; i < this.data.activity_info.length; i++) {
       if (this.data.activity_info[i].type == "full_gift"
-        && this.data.OrderReceivableMoney >= parseInt(this.data.activity_info[i].full)) {
+        && this.data.OrderReceivableMoney >= (this.data.activity_info[i].full)) {
         // console.log("满赠活动有:" + this.data.activity_info[i].full+ "赠" + this.data.activity_info[i].cut);
         //获取最优满减
-        if (temp < parseInt(this.data.activity_info[i].full)){
-          temp = parseInt(this.data.activity_info[i].full);
+        if (temp < (this.data.activity_info[i].full)){
+          temp = (this.data.activity_info[i].full);
           temp2 = this.data.activity_info[i].cut;
         }
       }
@@ -81,7 +81,7 @@ Page({
     var Order_code = "";
     wx.request({
       url: "https://whitedragoncode.cn/api/v1/small_program/orders",
-      data: { "store_id": "1", "desk_id": "1", "user_id": getApp().globalData.user_id, "order": that.data.Menu_info },
+      data: { "store_id": getApp().globalData.store_id, "desk_id": getApp().globalData.desk_id,"user_id": getApp().globalData.user_id, "order": that.data.Menu_info },
       method: 'POST',
       success: function (res) {
         console.log(res.data)

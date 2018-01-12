@@ -77,16 +77,14 @@
   align-items: center;
 }
 .ActivityInfoImage{
-  width:80rpx;
+  width:60rpx;
   height:60rpx;
   margin-left: 50rpx;
-  margin-top: 20rpx;
 }
 .ActivityInfoGiftImage{
-  width:80rpx;
-  height:80rpx;
+  width:60rpx;
+  height:60rpx;
   margin-left: 50rpx;
-  margin-top: 20rpx;
 }
 .ActivityInfoContextLayout{
   align-items: center;

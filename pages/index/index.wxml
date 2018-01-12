@@ -1,8 +1,7 @@
 <!--店铺活动展示 -->
-
 <view class="bottomMiddleHeaderItem" animation="{{animationMiddleHeaderItem}}">
    <view class="bottomMiddleHeaderItemSubView">请授权</view>
 </view>
 <view class='TipInfo'>
-  <text class="TipInfoTxt">温馨提示：请给予官方小程序相关权限，避免点餐失败</text>
+  <text class="TipInfoTxt">温馨提示：请给予小程序相关权限，避免点餐失败</text>
 </view>

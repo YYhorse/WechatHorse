@@ -13,13 +13,14 @@
   margin-left: 50rpx;
   width:150rpx;
   height:150rpx;
+  border-radius: 50%;
 }
 .ShopTitle{
   display: flex;
   flex-direction: column;
   width: fit-content;
   margin-top: 40rpx;
-  margin-left: 40rpx;
+  margin-left: 20rpx;
 }
 .ShopName_txt{
   font-size: 50rpx;
@@ -27,9 +28,12 @@
   color: white;
 }
 .ShopDescription_txt{
-  font-size: 30rpx;
+  font-size: 25rpx;
   margin-top: 10rpx;
   color: white;
+  overflow:hidden;      
+  text-overflow:ellipsis;
+  white-space:nowrap;  
 }
 .ShopMessage{
   display: flex;
@@ -85,6 +89,7 @@
 .ActivityInfo_txt{
   font-size: 25rpx;
   margin-left: 30rpx;
+  width: 90%;
   color: white;
   overflow:hidden;      
   text-overflow:ellipsis;

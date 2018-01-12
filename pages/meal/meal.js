@@ -20,7 +20,7 @@ Page({
     }),
     wx.request({
       url: 'https://whitedragoncode.cn/api/v1/small_program/stores?',
-      data: { store_id: 1 },
+      data: { store_id: getApp().globalData.store_id},
       header: { "Content-Type": 'application/x-www-form-urlencoded'},
       success: function (res) {
         wx.hideLoading()
@@ -128,7 +128,7 @@ Page({
     //呼叫服务 HTTP请求
     wx.request({
       url: "https://whitedragoncode.cn/api/v1/small_program/call_clerks",
-      data: { "store_id": "1", "desk_id": "2", "nickname": getApp().globalData.userInfo.nickName, "type": "help" },
+      data: { "store_id": getApp().globalData.store_id, "desk_id": getApp().globalData.desk_id, "nickname": getApp().globalData.userInfo.nickName, "type": "help" },
       method: 'POST',
       success: function (res) {
         wx.showToast({

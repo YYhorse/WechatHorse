@@ -7,6 +7,8 @@ Page({
     Desk_fontSize:30,
     Meanu_info:"",
     Activity_info:"",
+    OrderCutActivity:"无",          //满减活动
+    OrderGiftActivity:"无",        //满赠活动
     OrderTime:"",
     OrderTotal:"",
     OrderReceivableMoney:"",       //订单应收   
@@ -22,7 +24,7 @@ Page({
       wx.showLoading({ title: '订单详情拉取中', }),
       wx.request({
         url: "https://whitedragoncode.cn/api/v1/small_program/orders",
-        data: { "store_id": "1", "user_id": getApp().globalData.user_id, "order_code": that.data.Order_Code},
+        data: { "store_id": getApp().globalData.store_id, "user_id": getApp().globalData.user_id, "order_code": that.data.Order_Code},
         method: 'GET',
         success: function (res) {
           console.log(res.data)
@@ -50,19 +52,41 @@ Page({
   },
   ShowUi:function(){
     //桌号字体设置
-    var size = 30;
-    if (this.data.Order_Info.desk_code.length < 4)
-      size = 30;
-    else if (this.data.Order_Info.desk_code.length >= 4 && this.data.Order_Info.desk_code.length < 8)
-      size = 25;
-    else
-      size = 20;
+    if (this.data.Order_Info.desk_code!=""){
+      var size = 30;
+      if (this.data.Order_Info.desk_code.length < 4)
+        size = 30;
+      else if (this.data.Order_Info.desk_code.length >= 4 && this.data.Order_Info.desk_code.length < 8)
+        size = 25;
+      else
+        size = 20;
+    }
+    //活动选择
+    if (this.data.Order_Info.activity_info!=null){
+      for (var i = 0; i < this.data.Order_Info.activity_info.length;i++){
+        if (this.data.Order_Info.activity_info[i].type =="full_cut"){
+          //满减活动
+          var temp = this.data.Order_Info.activity_info[i].cut;
+          this.setData({
+            OrderCutActivity: temp != 0 ? "减￥" + temp + "元" : "无",
+          })
+        }
+        else if (this.data.Order_Info.activity_info[i].type == "full_gift"){
+          //满赠活动
+          var temp = this.data.Order_Info.activity_info[i].gift;
+          this.setData({
+            OrderGiftActivity: temp != 0 ? "赠送" + temp : "无",
+          })
+        }
+      }
+    }
     this.setData({
       Queue_No: '#' + this.data.Order_Info.queue_no,
       Desk_Name: this.data.Order_Info.desk_code,
       Desk_fontSize: size,
       OrderTime: this.data.Order_Info.created_at,
       Meanu_info: this.data.Order_Info.menu_info,
+      Activity_info: this.data.Order_Info.activity_info,
       OrderReceivableMoney: this.data.Order_Info.origin_total_price,
       OrderPaidMoney: this.data.Order_Info.actual_total_price
     })
