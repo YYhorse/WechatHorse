@@ -23,9 +23,7 @@ Page({
       },
       fail: function () {
         wx.hideLoading()
-        wx.showToast({
-          title: '失败',
-        })
+        wx.showToast({title: '失败'})
         console.log(res.data)
       }
     })  
@@ -34,8 +32,6 @@ Page({
     var Index = e.currentTarget.dataset.numid;
     let orderJson = JSON.stringify(this.data.Order[Index]);
     console.log("订单转JSON=" + orderJson);
-    wx.navigateTo({
-      url: '/pages/payfinish/payfinish?orderJson=' + orderJson,
-    })
+    wx.navigateTo({ url: '/pages/payfinish/payfinish?orderJson=' + orderJson})
   }
 })

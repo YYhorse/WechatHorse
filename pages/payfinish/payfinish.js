@@ -11,6 +11,7 @@ Page({
     OrderGiftActivity:"无",        //满赠活动
     OrderTime:"",
     OrderTotal:"",
+    TradingStatus:"",              //订单状态
     OrderReceivableMoney:"",       //订单应收   
     OrderPaidMoney:"",             //订单实付
   },
@@ -79,6 +80,14 @@ Page({
           })
         }
       }
+      //支付状态
+      var tradingtemp = "";
+      if (this.data.Order_Info.trading_status == 'pending_payment')
+        tradingtemp = "待支付"
+      else if (this.data.Order_Info.trading_status == 'order_complete')
+        tradingtemp = "支付完成"
+      else
+        tradingtemp = "打印完成" 
     }
     this.setData({
       Queue_No: '#' + this.data.Order_Info.queue_no,
@@ -87,6 +96,7 @@ Page({
       OrderTime: this.data.Order_Info.created_at,
       Meanu_info: this.data.Order_Info.menu_info,
       Activity_info: this.data.Order_Info.activity_info,
+      TradingStatus: tradingtemp,
       OrderReceivableMoney: this.data.Order_Info.origin_total_price,
       OrderPaidMoney: this.data.Order_Info.actual_total_price
     })
@@ -118,6 +128,7 @@ Page({
     }.bind(this), 500);
   },
   ClickContinueShop:function(e){
+    getApp().globalData.continue_buy = true;
     wx.navigateTo({
       url: '/pages/meal/meal'
     })

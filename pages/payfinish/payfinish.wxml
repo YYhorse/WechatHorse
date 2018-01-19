@@ -72,8 +72,8 @@
 </view>
 <view class='linecolumngray'></view>
 <view class='SuccessLayout'>
-  <image class="SuccessPhoto" src="../image/yes.png" mode="aspectFill"/>
-  <text class="SuccessTxt">交易成功</text>
+  <image class="SuccessPhoto" src="{{TradingStatus=='待支付'?'../image/fail.png':'../image/success.png'}}" mode="aspectFill"/>
+  <text class="{{TradingStatus=='待支付'?'FailTxt':'SuccessTxt'}}" >{{TradingStatus}}</text>
 </view>
 <!--底栏信息 -->
 <view class="BuyFoodLayout" animation="{{animationMiddleHeaderItem}}" bindtap='ClickContinueShop'>继续购物</view>

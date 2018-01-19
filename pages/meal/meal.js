@@ -12,16 +12,98 @@ Page({
     TotalCount:0,
     showModalStatus:false,
   },
-  onLoad:function(){
-    var that = this;  
-    wx.setNavigationBarTitle({  title: '小程序点餐' }),
-    wx.showLoading({
-      title: '菜单拉取中',  
-    }),
+  onLoad: function (options){
+    wx.setNavigationBarTitle({  title: '小程序点餐' });
+    if (getApp().globalData.continue_buy==false){
+      if (options.scene == null) {
+        var that = this;
+        wx.showModal({
+          title: '未知店铺',
+          content: '是否进入测试店铺',
+          cancelText: '退出',
+          cancelColor: "#3f3f3f",
+          confirmText: '确认',
+          confirmColor: "#FF0000",
+          success: function (res) {
+            if (res.confirm) {
+              let scene = "store_id=2&desk_id=4";
+              that.DealScene(scene);
+              that.AutoLogin();
+            }
+            else
+              console.log('退出')
+          }
+        })
+      }
+      else {
+        // options 中的 scene 需要使用 decodeURIComponent 才能获取到生成二维码时传入的 scene
+        let scene = decodeURIComponent(options.scene);
+        this.DealScene(scene);
+        this.AutoLogin();
+      }
+    }
+    else{
+      this.AutoLogin();
+    }
+  },
+  /* 处理扫码进入区分店铺 */
+  DealScene: function (sceneTemp) {
+    sceneTemp = sceneTemp.split('&')
+    let obj = {}
+    for (let i = 0; i < sceneTemp.length; i++) {
+      let item = sceneTemp[i].split('=')
+      obj[item[0]] = item[1]
+    }
+    getApp().globalData.store_id = obj.store_id;
+    getApp().globalData.desk_id = obj.desk_id;
+    console.log(obj.store_id + "|" + obj.desk_id)
+  },
+  /*   自动登录    */
+  AutoLogin: function () {
+    var that = this;
+    wx.showLoading({title: '正在登录中'}),
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          wx.hideLoading();
+          getApp().globalData.code = res.code;
+          wx.getUserInfo({
+            success: function (res) {
+              getApp().globalData.userInfo = res.userInfo
+              wx.request({
+                url: "https://whitedragoncode.cn/api/v1/small_program/stores/login",
+                data: { "code": getApp().globalData.code, "nickname": getApp().globalData.userInfo.nickName, "sex": getApp().globalData.userInfo.gender, "province": getApp().globalData.userInfo.province, "city": getApp().globalData.userInfo.city, "store_id": getApp().globalData.store_id, "desk_id": getApp().globalData.desk_id },
+                method: 'POST',
+                success: function (res) {
+                  console.log(res.data);
+                  if (res.data.status_code == 602)
+                    wx.showLoading({title: '登录缺少参数',})
+                  else if (res.data.status_code == 603)
+                    wx.showLoading({title: '餐桌不存在',})
+                  else {
+                    getApp().globalData.user_id = res.data.user_id;
+                    that.GetShopInfo(); 
+                  }
+                },
+                fail: function () { wx.showToast({title: '登陆失败',})}
+              })
+            },
+            fail: function () { wx.showToast({title: "获取信息失败!",})}
+          })
+        } 
+        else
+          console.log('获取用户登录状态失败' + res.errMsg)
+      }
+    })
+  },
+  /* 获取店铺信息 */
+  GetShopInfo:function(){
+    var that = this;
+    wx.showLoading({title: '菜单拉取中'}),
     wx.request({
       url: 'https://whitedragoncode.cn/api/v1/small_program/stores?',
-      data: { store_id: getApp().globalData.store_id},
-      header: { "Content-Type": 'application/x-www-form-urlencoded'},
+      data: { store_id: getApp().globalData.store_id },
+      header: { "Content-Type": 'application/x-www-form-urlencoded' },
       success: function (res) {
         wx.hideLoading()
         postData = res.data
@@ -131,22 +213,16 @@ Page({
       data: { "store_id": getApp().globalData.store_id, "desk_id": getApp().globalData.desk_id, "nickname": getApp().globalData.userInfo.nickName, "type": "help" },
       method: 'POST',
       success: function (res) {
-        wx.showToast({
-          title: '已为您呼叫成功',
-        })
+        wx.showToast({  title: '已为您呼叫成功'})
       },
       fail: function (res) {
-        wx.showToast({
-          title: '呼叫失败'+res.data,
-        })
+        wx.showToast({  title: '呼叫失败'+res.data})
       }
     })
   },
   /*  响应我的订单信息 */
   ClickMyOrderMethod:function(){
-    wx.navigateTo({
-      url: '/pages/myorder/myorder'
-    })
+    wx.navigateTo({ url: '/pages/myorder/myorder'})
   },
   /*  显示全部活动信息 */
   ClickActivityInfoShowMethod:function(e){
@@ -217,7 +293,7 @@ Page({
       })
     }
     else
-      wx.showToast({title: '请先选购商品',})
+      wx.showToast({title: '请先选购商品'})
   },
   /* 显示购物车  */
   showModal: function () {

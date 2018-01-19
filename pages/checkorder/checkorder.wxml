@@ -35,7 +35,7 @@
   <image class='PayImage' src="../image/wechatpay.png"></image>
   <text class='PayText'>微信支付</text>
   <view class='PayLayout'>
-    <image class='PayImage2'src="../image/yes.png"></image>
+    <image class='PayImage2'src="../image/success.png"></image>
   </view>
 </view>
 <view class='itemgray2'></view>

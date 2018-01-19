@@ -233,6 +233,11 @@ page {
   font-weight: bold;
   color: #41B035;
 }
+.FailTxt{
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #D81E06;
+}
 
 .BuyFoodLayout{
   display: flex;
