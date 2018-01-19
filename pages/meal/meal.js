@@ -11,9 +11,13 @@ Page({
     TotalPrice:"￥0.00元",
     TotalCount:0,
     showModalStatus:false,
+    hide_good_box: true,    //抛物线小球是否隐藏
   },
   onLoad: function (options){
     wx.setNavigationBarTitle({  title: '小程序点餐' });
+    this.busPos = {};
+    this.busPos['x'] = 45;//购物车的位置
+    this.busPos['y'] = getApp().globalData.hh - 56;
     if (getApp().globalData.continue_buy==false){
       if (options.scene == null) {
         var that = this;
@@ -149,6 +153,50 @@ Page({
     this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number++;
     console.log("数量为=" + this.data.product_categories[this.data.CurrentCategoryPostion].products[Index].number);
     this.UpdataUi(); 
+    //-----抛物线--------//
+    if(this.data.hide_good_box==true){
+      this.finger = {}; 
+      var topPoint = {};
+      this.finger['x'] = e.touches["0"].clientX;//点击的位置
+      this.finger['y'] = e.touches["0"].clientY;
+      if (this.finger['y'] < this.busPos['y'])
+        topPoint['y'] = this.finger['y'] - 150;
+      else
+        topPoint['y'] = this.busPos['y'] - 150;
+      topPoint['x'] = Math.abs(this.finger['x'] - this.busPos['x']) / 2;
+
+      if (this.finger['x'] > this.busPos['x'])
+        topPoint['x'] = (this.finger['x'] - this.busPos['x']) / 2 + this.busPos['x'];
+      else 
+        topPoint['x'] = (this.busPos['x'] - this.finger['x']) / 2 + this.finger['x'];
+      this.linePos = getApp().bezier([this.busPos, topPoint, this.finger], 30);
+      this.startAnimation(e);
+    }
+  },
+  startAnimation: function (e) {
+    var index = 0, that = this,
+    bezier_points = that.linePos['bezier_points'];
+    console.log(bezier_points);
+    this.setData({
+      hide_good_box: false,
+      bus_x: that.finger['x'],
+      bus_y: that.finger['y']
+    })
+    var len = bezier_points.length;
+    index = len
+    this.timer = setInterval(function () {
+      index--;
+      that.setData({
+        bus_x: bezier_points[index]['x'],
+        bus_y: bezier_points[index]['y']
+      })
+      if (index < 1) {
+        clearInterval(that.timer);
+        that.setData({
+          hide_good_box: true
+        })
+      }
+    }, 10);
   },
   /* 点击单产品减少按钮事件 */
   ReduceFoodNumMethod:function(e){

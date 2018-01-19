@@ -106,3 +106,6 @@
     </view>
   </view>
 </view>
+
+  <!--小球的实现-->
+  <view class="good_box" hidden="{{hide_good_box}}"  style="left: {{bus_x}}px; top: {{bus_y}}px;"></view>
